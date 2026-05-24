@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo digital do Foodtruck Burgers. Confira hambúrgueres, acompanhamentos, bebidas e sobremesas.">
+  <title>Catálogo Digital - Foodtruck Burgers</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+ <body>
+  <header>
+    <h1>Foodtruck Burgers</h1>
+    <p>Catálogo Digital</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#vitrine">Vitrine</a></li>
+      <li><a href="#tabela">Tabela</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="inicio">
+      <h2>Bem-vindo ao Foodtruck Burgers</h2>
+      <p>Confira nossos hambúrgueres artesanais, acompanhamentos suculentos, bebidas especiais e sobremesas deliciosas.</p>
+    </section>
+
+    <aside>
+      <h3>Combos</h3>
+      <p>Hambúrguer + Batata + Refrigerante por R$35,00</p>
+      <p>Hambúrguer + Batata + Suco Natural por R$36,00</p>
+    </aside>
+
+    <section id="vitrine">
+      <h2>Vitrine de Produtos</h2>
+      <div class="produtos">
+        <article class="card">
+          <figure>
+            <img src="IMG/classico.jpg" alt="Hambúrguer Clássico da Casa">
+            <figcaption>Clássico da Casa</figcaption>
+          </figure>
+          <p>Pão brioche, carne bovina, queijo cheddar, alface, tomate e molho especial.</p>
+          <p class="preco">R$25,00</p>
+        </article>
+
+        <article class="card">
+          <figure>
+            <img src="IMG/barbecue.jpg" alt="Hambúrguer Barbecue Bacon">
+            <figcaption>Barbecue Bacon</figcaption>
+          </figure>
+          <p>Carne bovina, queijo prato, cebola caramelizada, bacon crocante e molho barbecue.</p>
+          <p class="preco">R$28,00</p>
+        </article>
+
+        <article class="card">
+          <figure>
+            <img src="IMG/veggie.jpg" alt="Hambúrguer Veggie Grill">
+            <figcaption>Veggie Grill</figcaption>
+          </figure>
+          <p>Hambúrguer de grão-de-bico e legumes grelhados, queijo vegano e rúcula.</p>
+          <p class="preco">R$26,00</p>
+        </article>
+
+        <article class="card">
+          <figure>
+            <img src="IMG/batata.jpg" alt="Batata Frita Crocante">
+            <figcaption>Batata Frita</figcaption>
+          </figure>
+          <p>Batata frita crocante, temperada com sal especial.</p>
+          <p class="preco">R$12,00</p>
+        </article>
+
+        <article class="card">
+          <figure>
+            <img src="IMG/refrigerante.jpg" alt="Refrigerante Gelado">
+            <figcaption>Refrigerante</figcaption>
+          </figure>
+          <p>Refrigerante gelado em lata ou garrafa.</p>
+          <p class="preco">R$6,00</p>
+        </article>
+
+        <article class="card">
+          <figure>
+            <img src="/suco.jpg" alt="Suco Natural">
+            <figcaption>Suco Natural</figcaption>
+          </figure>
+          <p>Suco natural de frutas frescas.</p>
+          <p class="preco">R$8,00</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="tabela">
+      <h2>Tabela de Preços</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Item</th>
+            <th>Preço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Hambúrguer</td><td>Clássico da Casa</td><td>R$25,00</td></tr>
+          <tr><td>Hambúrguer</td><td>Barbecue Bacon</td><td>R$28,00</td></tr>
+          <tr><td>Hambúrguer</td><td>Veggie Grill</td><td>R$26,00</td></tr>
+          <tr><td>Acompanhamento</td><td>Batata Frita</td><td>R$12,00</td></tr>
+          <tr><td>Bebida</td><td>Refrigerante</td><td>R$6,00</td></tr>
+          <tr><td>Bebida</td><td>Suco Natural</td><td>R$8,00</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="contato">
+      <h2>Solicite seu pedido</h2>
+      <form>
+        <fieldset>
+          <legend>Dados Pessoais</legend>
+          <label for="nome">Nome:</label>
+          <input id="nome" name="nome" type="text" required>
+
+          <label for="email">E-mail:</label>
+          <input id="email" name="email" type="email" required>
+
+          <label for="telefone">Telefone:</label>
+          <input id="telefone" name="telefone" type="tel">
+        </fieldset>
+
+        <fieldset>
+          <legend>Pedido</legend>
+          <label for="produto">Hambúrguer:</label>
+          <select id="produto" name="produto" required>
+            <option value="">Selecione</option>
+            <option value="classico">Clássico da Casa</option>
+            <option value="barbecue">Barbecue Bacon</option>
+            <option value="veggie">Veggie Grill</option>
+          </select>
+
+          <label for="acompanhamento">Acompanhamento:</label>
+          <select id="acompanhamento" name="acompanhamento">
+            <option value="">Selecione</option>
+            <option value="batata">Batata Frita</option>
+            <option value="sem">Nenhum</option>
+          </select>
+
+          <label for="bebida">Bebida:</label>
+          <select id="bebida" name="bebida">
+            <option value="">Selecione</option>
+            <option value="refrigerante">Refrigerante</option>
+            <option value="suco">Suco Natural</option>
+            <option value="agua">Água</option>
+            <option value="sem">Nenhuma</option>
+          </select>
+
+          <label for="quantidade">Quantidade:</label>
+          <input id="quantidade" name="quantidade" type="number" min="1">
+
+          <label for="mensagem">Mensagem:</label>
+          <textarea id="mensagem" name="mensagem"></textarea>
+        </fieldset>
+        <div id="resumoPedido"></div>
+       
+        <button type="button" id="finalizarPedido">Finalizar Pedido</button>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Endereço: Bloco A Lotes 3/4, 70092-900, Brasília - DF, Brasil, ponto de referência: ao lado da Sede da Caixa Econômica Federal</p>
+    <p>Contato: contato@foodtruckburgers.com</p>
+    <p>&copy; 2026 Foodtruck Burgers</p>
+  </footer>
+  <script src="index.js"></script>
+</body>
+</html>
