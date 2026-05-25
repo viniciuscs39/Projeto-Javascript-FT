@@ -1,4 +1,3 @@
-
 const produtos = [
   { categoria: "Hambúrguer", nome: "Clássico da Casa", preco: 25, value: "classico" },
   { categoria: "Hambúrguer", nome: "Barbecue Bacon", preco: 28, value: "barbecue" },
@@ -22,7 +21,7 @@ document.querySelector("form").addEventListener("submit", function(event) {
   const acompanhamento = document.getElementById("acompanhamento").value;
   const bebida = document.getElementById("bebida").value;
   const quantidade = Math.max(1, parseInt(document.getElementById("quantidade").value) || 1);
-  const mensagem = document.getElementById("mensagem").value; // 🔹 captura observação
+  const mensagem = document.getElementById("mensagem").value;
 
   let itens = [];
   let total = 0;
@@ -45,7 +44,6 @@ document.querySelector("form").addEventListener("submit", function(event) {
     total += item.preco;
   }
 
-  // 🔹 resumo com observação
   resumoTexto = `Resumo do Pedido:\nItens: ${itens.join(", ")}\nTotal: R$${total.toFixed(2)}\nObservação: ${mensagem}`;
 
   const resumo = document.getElementById("resumoPedido");
@@ -68,14 +66,3 @@ document.getElementById("finalizarPedido").addEventListener("click", () => {
   window.open(url, "_blank");
 });
 
-
-// Botão Finalizar Pedido → WhatsApp
-document.getElementById("finalizarPedido").addEventListener("click", () => {
-  if (!resumoTexto) {
-    alert("Preencha o formulário e clique em Enviar antes de finalizar o pedido.");
-    return;
-  }
-  const telefone = "5599999999999"; // coloque aqui o número do WhatsApp do Foodtruck
-  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(resumoTexto)}`;
-  window.open(url, "_blank");
-});
