@@ -1,68 +1,90 @@
-const produtos = [
-  { categoria: "Hambúrguer", nome: "Clássico da Casa", preco: 25, value: "classico" },
-  { categoria: "Hambúrguer", nome: "Barbecue Bacon", preco: 28, value: "barbecue" },
-  { categoria: "Hambúrguer", nome: "Veggie Grill", preco: 26, value: "veggie" },
-  { categoria: "Acompanhamento", nome: "Batata Frita", preco: 12, value: "batata" },
-  { categoria: "Bebida", nome: "Refrigerante", preco: 6, value: "refrigerante" },
-  { categoria: "Bebida", nome: "Suco Natural", preco: 8, value: "suco" },
-  { categoria: "Bebida", nome: "Água", preco: 4, value: "agua" }
+let listaItem = [
+  { categoria: "Hambúrguer", nome: "Clássico da Casa", preco: 25, comprado: false },
+  { categoria: "Hambúrguer", nome: "Barbecue Bacon", preco: 28, comprado: false },
+  { categoria: "Hambúrguer", nome: "Veggie Grill", preco: 26, comprado: false },
+  { categoria: "Acompanhamento", nome: "Batata Frita", preco: 12, comprado: false },
+  { categoria: "Bebida", nome: "Refrigerante", preco: 6, comprado: false },
+  { categoria: "Bebida", nome: "Suco Natural", preco: 8, comprado: false },
+  { categoria: "Bebida", nome: "Água", preco: 4, comprado: false }
 ];
 
-function buscarProduto(value) {
-  return produtos.find(p => p.value === value);
+let itemEditando = null; // guarda índice do item em edição
+
+function gerarLista() {
+  const ul = document.getElementById("listaItem");
+  ul.innerHTML = "";
+
+  listaItem.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.classList.add("item-card");
+
+    li.innerHTML = `
+      <div class="item-info">
+        <input type="checkbox" data-index="${index}" ${item.comprado ? "checked" : ""}>
+        <span>${item.categoria} - ${item.nome} (R$${item.preco.toFixed(2)})</span>
+      </div>
+      <div class="item-actions">
+        <button class="btn-remover" onclick="removerItem(${index})">Remover</button>
+        <button class="btn-editar" onclick="prepararEdicao(${index})">Editar</button>
+      </div>
+    `;
+    ul.appendChild(li);
+  });
+
+    ul.querySelectorAll("input[type=checkbox]").forEach(chk => {
+    chk.addEventListener("change", (e) => {
+      const idx = e.target.dataset.index;
+      listaItem[idx].comprado = e.target.checked;
+      calcularTotal();
+    });
+  });
 }
 
-let resumoTexto = "";
+function calcularTotal() {
+  const total = listaItem
+    .filter(item => item.comprado)
+    .reduce((acc, item) => acc + item.preco, 0);
 
-document.querySelector("form").addEventListener("submit", function(event) {
-  event.preventDefault();
+  document.getElementById("totalComprado").textContent =
+    `Total dos itens comprados: R$${total.toFixed(2)}`;
+}
 
-  const produto = document.getElementById("produto").value;
-  const acompanhamento = document.getElementById("acompanhamento").value;
-  const bebida = document.getElementById("bebida").value;
-  const quantidade = Math.max(1, parseInt(document.getElementById("quantidade").value) || 1);
-  const mensagem = document.getElementById("mensagem").value;
+document.getElementById("formItem").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const categoria = document.getElementById("categoria").value;
+  const nome = document.getElementById("nomeItem").value;
+  const preco = parseFloat(document.getElementById("preco").value);
 
-  let itens = [];
-  let total = 0;
-
-  if (produto) {
-    const item = buscarProduto(produto);
-    itens.push(`${quantidade}x ${item.nome}`);
-    total += item.preco * quantidade;
+  if (itemEditando !== null) {
+    
+    listaItem[itemEditando] = { 
+      categoria, 
+      nome, 
+      preco, 
+      comprado: listaItem[itemEditando].comprado 
+    };
+    itemEditando = null;
+    document.getElementById("btnSubmit").textContent = "Adicionar Item";
+  } else {
+    
+    listaItem.push({ categoria, nome, preco, comprado: false });
   }
 
-  if (acompanhamento && acompanhamento !== "sem") {
-    const item = buscarProduto(acompanhamento);
-    itens.push(item.nome);
-    total += item.preco;
-  }
-
-  if (bebida && bebida !== "sem") {
-    const item = buscarProduto(bebida);
-    itens.push(item.nome);
-    total += item.preco;
-  }
-
-  resumoTexto = `Resumo do Pedido:\nItens: ${itens.join(", ")}\nTotal: R$${total.toFixed(2)}\nObservação: ${mensagem}`;
-
-  const resumo = document.getElementById("resumoPedido");
-  resumo.innerHTML = `
-    <h3>Resumo do Pedido</h3>
-    <p>Itens: ${itens.join(", ")}</p>
-    <p>Total: R$${total.toFixed(2)}</p>
-    <p><strong>Observação:</strong> ${mensagem}</p>
-  `;
+  e.target.reset();
+  gerarLista();
+  calcularTotal();
 });
 
-// Botão Finalizar Pedido → WhatsApp
-document.getElementById("finalizarPedido").addEventListener("click", () => {
-  if (!resumoTexto) {
-    alert("Preencha o formulário e clique em Enviar antes de finalizar o pedido.");
-    return;
-  }
-  const telefone = "5599999999999"; // coloque aqui o número do WhatsApp do Foodtruck
-  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(resumoTexto)}`;
-  window.open(url, "_blank");
-});
+function removerItem(index) {
+  listaItem.splice(index, 1);
+  gerarLista();
+  calcularTotal();
+}
+
+function prepararEdicao(index) {
+  const item = listaItem[index];
+  document.getElementById("categoria").value = item.categoria;
+  document.getElementById("nomeItem").value = item.nome;
+  document.getElementById("preco").value = item.preco;
+  itemEditando = index;
 
