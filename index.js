@@ -87,4 +87,11 @@ function prepararEdicao(index) {
   document.getElementById("nomeItem").value = item.nome;
   document.getElementById("preco").value = item.preco;
   itemEditando = index;
+ 
+  document.getElementById("btnSubmit").textContent = "Salvar Alteração";
+}
 
+document.addEventListener("DOMContentLoaded", () => {
+  gerarLista();
+  calcularTotal();
+});
