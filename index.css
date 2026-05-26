@@ -1,5 +1,3 @@
-
-
 body {
   font-family: Arial, sans-serif;
   background: #f9f9f9;
@@ -56,8 +54,3 @@ main {
   border-radius: 8px;
 }
 
-
-img[alt="Hambúrguer Veggie Grill"] {
-  max-width: 160px;   
-  height: auto;
-  border-radius: 8px;
