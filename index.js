@@ -1,11 +1,4 @@
-// =============================================
-// FOODTRUCK BURGERS — Lógica do Cardápio
-// =============================================
 
-// -----------------------------------------------
-// ARRAY DE ITENS (objeto com categoria, nome, preço e status)
-// Cada elemento é um objeto literal { categoria, nome, preco, comprado }
-// -----------------------------------------------
 let listaItens = [
   { categoria: "Hambúrguer",    nome: "Clássico da Casa", preco: 25, comprado: false },
   { categoria: "Hambúrguer",    nome: "Barbecue Bacon",   preco: 28, comprado: false },
@@ -16,23 +9,19 @@ let listaItens = [
   { categoria: "Bebida",        nome: "Água",             preco: 4,  comprado: false }
 ];
 
-// Guarda o índice do item sendo editado (null = modo adição)
+
 let itemEditando = null;
 
-// -----------------------------------------------
-// FUNÇÃO: gerarLista
-// Limpa e recria toda a <ul> com os itens do array
-// -----------------------------------------------
+
 function gerarLista() {
   const ul = document.getElementById("listaItem");
-  ul.innerHTML = ""; // limpa a lista antes de redesenhar
-
-  // forEach percorre cada elemento do array e cria um <li>
+  ul.innerHTML = ""; 
+  
   listaItens.forEach(function(item, index) {
     const li = document.createElement("li");
     li.classList.add("item-card");
 
-    // Se o item estiver marcado, adiciona a classe visual "comprado"
+    
     if (item.comprado) {
       li.classList.add("comprado");
     }
@@ -53,32 +42,28 @@ function gerarLista() {
       </div>
     `;
 
-    ul.appendChild(li); // insere o <li> no DOM
+    ul.appendChild(li); 
   });
 
-  // Adiciona evento de change nos checkboxes após renderizar
+  
   ul.querySelectorAll("input[type=checkbox]").forEach(function(chk) {
     chk.addEventListener("change", function(e) {
-      const idx = parseInt(e.target.dataset.index); // converte string → número
-      listaItens[idx].comprado = e.target.checked;  // atualiza o objeto no array
-      gerarLista();      // re-renderiza para aplicar o risco no texto
-      calcularTotal();   // recalcula o total
+      const idx = parseInt(e.target.dataset.index); 
+      listaItens[idx].comprado = e.target.checked;  
+      gerarLista();      
+      calcularTotal();   
     });
   });
 }
 
-// -----------------------------------------------
-// FUNÇÃO: calcularTotal
-// Usa filter() para pegar só os marcados e
-// reduce() para somar os preços → exibe no <p>
-// -----------------------------------------------
+
 function calcularTotal() {
-  // filter() — retorna novo array só com os itens comprado=true
+  
   const itensSelecionados = listaItens.filter(function(item) {
     return item.comprado;
   });
 
-  // reduce() — acumula a soma dos preços (começa em 0)
+  
   const total = itensSelecionados.reduce(function(acumulador, item) {
     return acumulador + item.preco;
   }, 0);
@@ -87,21 +72,18 @@ function calcularTotal() {
     `Total dos itens selecionados: R$${total.toFixed(2)}`;
 }
 
-// -----------------------------------------------
-// EVENTO: submit do formulário
-// Adiciona um novo item (push) OU salva a edição
-// -----------------------------------------------
-document.getElementById("formItem").addEventListener("submit", function(e) {
-  e.preventDefault(); // impede recarregar a página
 
-  // Lê os valores do formulário
+document.getElementById("formItem").addEventListener("submit", function(e) {
+  e.preventDefault(); 
+
+  
   const categoria = document.getElementById("categoria").value;
   const nome      = document.getElementById("nomeItem").value.trim();
   const preco     = parseFloat(document.getElementById("preco").value);
 
   if (itemEditando !== null) {
-    // ---- MODO EDIÇÃO ----
-    // Sobrescreve o objeto no índice salvo, mantendo o status "comprado"
+    
+    
     listaItens[itemEditando] = {
       categoria: categoria,
       nome:      nome,
@@ -109,15 +91,14 @@ document.getElementById("formItem").addEventListener("submit", function(e) {
       comprado:  listaItens[itemEditando].comprado
     };
 
-    // Volta ao modo adição
+    
     itemEditando = null;
     document.getElementById("btnSubmit").textContent = "Adicionar Item";
     document.getElementById("btnCancelar").style.display = "none";
 
   } else {
-    // ---- MODO ADIÇÃO ----
-    // push() — adiciona o novo objeto no FINAL do array
-    listaItens.push({
+    
+        listaItens.push({
       categoria: categoria,
       nome:      nome,
       preco:     preco,
@@ -125,21 +106,17 @@ document.getElementById("formItem").addEventListener("submit", function(e) {
     });
   }
 
-  e.target.reset();   // limpa os campos do formulário
-  gerarLista();       // atualiza a lista na tela
-  calcularTotal();    // atualiza o total
+  e.target.reset();   
+  gerarLista();       
+  calcularTotal();   
 });
 
-// -----------------------------------------------
-// FUNÇÃO: removerItem
-// splice() remove 1 elemento pelo índice
-// -----------------------------------------------
+/
 function removerItem(index) {
-  // splice(início, quantidade) — remove e reordena o array
+  
   listaItens.splice(index, 1);
 
-  // Se estava editando o item removido, cancela a edição
-  if (itemEditando === index) {
+    if (itemEditando === index) {
     cancelarEdicao();
   }
 
@@ -147,10 +124,7 @@ function removerItem(index) {
   calcularTotal();
 }
 
-// -----------------------------------------------
-// FUNÇÃO: prepararEdicao
-// Preenche o formulário com os dados do item
-// -----------------------------------------------
+
 function prepararEdicao(index) {
   const item = listaItens[index];
 
@@ -158,18 +132,15 @@ function prepararEdicao(index) {
   document.getElementById("nomeItem").value  = item.nome;
   document.getElementById("preco").value     = item.preco;
 
-  itemEditando = index; // marca o índice em edição
+  itemEditando = index; 
   document.getElementById("btnSubmit").textContent  = "Salvar Alteração";
   document.getElementById("btnCancelar").style.display = "inline-block";
 
-  // Rola suavemente até o formulário
+  
   document.getElementById("formItem").scrollIntoView({ behavior: "smooth" });
 }
 
-// -----------------------------------------------
-// FUNÇÃO: cancelarEdicao
-// Reseta o formulário e volta ao modo adição
-// -----------------------------------------------
+
 function cancelarEdicao() {
   itemEditando = null;
   document.getElementById("formItem").reset();
@@ -177,10 +148,7 @@ function cancelarEdicao() {
   document.getElementById("btnCancelar").style.display = "none";
 }
 
-// -----------------------------------------------
-// BOTÃO: Remover Último — pop()
-// pop() retira o ÚLTIMO elemento do array e o retorna
-// -----------------------------------------------
+
 document.getElementById("btnRemoverUltimo").addEventListener("click", function() {
   if (listaItens.length === 0) {
     alert("A lista já está vazia!");
@@ -194,10 +162,7 @@ document.getElementById("btnRemoverUltimo").addEventListener("click", function()
   calcularTotal();
 });
 
-// -----------------------------------------------
-// BOTÃO: Remover Primeiro — shift()
-// shift() retira o PRIMEIRO elemento do array e o retorna
-// -----------------------------------------------
+
 document.getElementById("btnRemoverPrimeiro").addEventListener("click", function() {
   if (listaItens.length === 0) {
     alert("A lista já está vazia!");
@@ -211,17 +176,12 @@ document.getElementById("btnRemoverPrimeiro").addEventListener("click", function
   calcularTotal();
 });
 
-// -----------------------------------------------
-// BOTÃO: Cancelar edição
-// -----------------------------------------------
+
 document.getElementById("btnCancelar").addEventListener("click", cancelarEdicao);
 
-// -----------------------------------------------
-// BOTÃO: Finalizar Pedido
-// Usa filter() + map() para montar o resumo
-// -----------------------------------------------
+
 document.getElementById("finalizarPedido").addEventListener("click", function() {
-  // filter() — pega só os marcados
+  
   const selecionados = listaItens.filter(function(item) {
     return item.comprado;
   });
@@ -231,17 +191,17 @@ document.getElementById("finalizarPedido").addEventListener("click", function() 
     return;
   }
 
-  // map() — transforma cada objeto em uma string legível
+  
   const resumo = selecionados.map(function(item) {
     return `• ${item.nome} (${item.categoria}) — R$${item.preco.toFixed(2)}`;
   });
 
-  // reduce() — total final
+  
   const total = selecionados.reduce(function(acc, item) {
     return acc + item.preco;
   }, 0);
 
-  // Exibe o resumo do pedido
+  
   alert(
     "=== Resumo do Pedido ===\n" +
     resumo.join("\n") +
@@ -249,9 +209,6 @@ document.getElementById("finalizarPedido").addEventListener("click", function() 
   );
 });
 
-// -----------------------------------------------
-// INICIALIZAÇÃO
-// Renderiza a lista assim que a página carrega
-// -----------------------------------------------
+
 gerarLista();
 calcularTotal();
