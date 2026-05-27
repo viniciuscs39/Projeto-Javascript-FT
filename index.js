@@ -16,8 +16,7 @@ let itemEditando = null;
 function gerarLista() {
   const ul = document.getElementById("listaItem");
   ul.innerHTML = ""; 
-  
-  listaItens.forEach(function(item, index) {
+
     const li = document.createElement("li");
     li.classList.add("item-card");
 
@@ -51,7 +50,7 @@ function gerarLista() {
       const idx = parseInt(e.target.dataset.index); 
       listaItens[idx].comprado = e.target.checked;  
       gerarLista();      
-      calcularTotal();   
+      calcularTotal();  
     });
   });
 }
@@ -63,7 +62,7 @@ function calcularTotal() {
     return item.comprado;
   });
 
-  
+ 
   const total = itensSelecionados.reduce(function(acumulador, item) {
     return acumulador + item.preco;
   }, 0);
@@ -73,16 +72,15 @@ function calcularTotal() {
 }
 
 
+
 document.getElementById("formItem").addEventListener("submit", function(e) {
   e.preventDefault(); 
-
   
   const categoria = document.getElementById("categoria").value;
   const nome      = document.getElementById("nomeItem").value.trim();
   const preco     = parseFloat(document.getElementById("preco").value);
 
   if (itemEditando !== null) {
-    
     
     listaItens[itemEditando] = {
       categoria: categoria,
@@ -98,7 +96,7 @@ document.getElementById("formItem").addEventListener("submit", function(e) {
 
   } else {
     
-        listaItens.push({
+    listaItens.push({
       categoria: categoria,
       nome:      nome,
       preco:     preco,
@@ -108,15 +106,16 @@ document.getElementById("formItem").addEventListener("submit", function(e) {
 
   e.target.reset();   
   gerarLista();       
-  calcularTotal();   
+  calcularTotal();    
 });
 
-/
+
 function removerItem(index) {
   
   listaItens.splice(index, 1);
 
-    if (itemEditando === index) {
+  
+  if (itemEditando === index) {
     cancelarEdicao();
   }
 
@@ -155,7 +154,7 @@ document.getElementById("btnRemoverUltimo").addEventListener("click", function()
     return;
   }
 
-  const removido = listaItens.pop(); // remove e guarda o item retirado
+  const removido = listaItens.pop(); 
   alert(`"${removido.nome}" removido do final da lista.`);
 
   gerarLista();
@@ -169,7 +168,7 @@ document.getElementById("btnRemoverPrimeiro").addEventListener("click", function
     return;
   }
 
-  const removido = listaItens.shift(); // remove e guarda o item retirado
+  const removido = listaItens.shift(); 
   alert(`"${removido.nome}" removido do início da lista.`);
 
   gerarLista();
@@ -196,12 +195,12 @@ document.getElementById("finalizarPedido").addEventListener("click", function() 
     return `• ${item.nome} (${item.categoria}) — R$${item.preco.toFixed(2)}`;
   });
 
-  
+ 
   const total = selecionados.reduce(function(acc, item) {
     return acc + item.preco;
   }, 0);
 
-  
+ 
   alert(
     "=== Resumo do Pedido ===\n" +
     resumo.join("\n") +
