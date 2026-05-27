@@ -1,8 +1,4 @@
-/* =========================================
-   FOODTRUCK BURGERS — Estilos Globais
-   ========================================= */
 
-/* Reset básico */
 * {
   box-sizing: border-box;
 }
@@ -15,9 +11,6 @@ body {
   color: #333;
 }
 
-/* =========================================
-   CABEÇALHO, NAV E RODAPÉ
-   ========================================= */
 
 header,
 footer {
@@ -64,9 +57,6 @@ footer p {
   font-size: 0.9rem;
 }
 
-/* =========================================
-   CONTEÚDO PRINCIPAL
-   ========================================= */
 
 main {
   padding: 1.5rem;
@@ -84,9 +74,7 @@ section h2 {
   color: #b71c1c;
 }
 
-/* =========================================
-   ASIDE — COMBOS
-   ========================================= */
+
 
 aside {
   background: #fff3e0;
@@ -101,9 +89,7 @@ aside h3 {
   color: #e65100;
 }
 
-/* =========================================
-   VITRINE DE PRODUTOS
-   ========================================= */
+
 
 .produtos {
   display: flex;
@@ -112,7 +98,7 @@ aside h3 {
   justify-content: center;
 }
 
-/* Card de produto */
+
 .card {
   width: 200px;
   background: #fff;
@@ -138,7 +124,7 @@ aside h3 {
   margin: 0 auto 0.5rem;
 }
 
-/* Imagem menor para o Veggie Grill */
+
 img[alt="Hambúrguer Veggie Grill"] {
   max-width: 140px;
 }
@@ -155,9 +141,7 @@ img[alt="Hambúrguer Veggie Grill"] {
   margin-top: 0.5rem;
 }
 
-/* =========================================
-   FORMULÁRIO — ADICIONAR / EDITAR ITEM
-   ========================================= */
+
 
 #formItem {
   display: flex;
@@ -215,9 +199,7 @@ img[alt="Hambúrguer Veggie Grill"] {
   background: #bdbdbd;
 }
 
-/* =========================================
-   BOTÕES DE AÇÃO RÁPIDA (pop / shift)
-   ========================================= */
+
 
 .acoes-lista {
   display: flex;
@@ -243,9 +225,7 @@ img[alt="Hambúrguer Veggie Grill"] {
   color: #fff;
 }
 
-/* =========================================
-   LISTA DE ITENS
-   ========================================= */
+
 
 #listaItem {
   list-style: none;
@@ -253,7 +233,7 @@ img[alt="Hambúrguer Veggie Grill"] {
   margin: 0 0 0.8rem;
 }
 
-/* Cada card de item da lista */
+
 .item-card {
   display: flex;
   justify-content: space-between;
@@ -324,9 +304,6 @@ img[alt="Hambúrguer Veggie Grill"] {
   background: #90caf9;
 }
 
-/* =========================================
-   TOTAL
-   ========================================= */
 
 #totalComprado {
   font-size: 1.05rem;
@@ -337,9 +314,6 @@ img[alt="Hambúrguer Veggie Grill"] {
   border-radius: 6px;
 }
 
-/* =========================================
-   FORMULÁRIO DE CONTATO
-   ========================================= */
 
 #formContato {
   background: #fff;
@@ -408,9 +382,6 @@ legend {
   background: #b71c1c;
 }
 
-/* =========================================
-   RESPONSIVO
-   ========================================= */
 
 @media (max-width: 600px) {
   header h1 {
