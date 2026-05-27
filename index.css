@@ -12,6 +12,7 @@ body {
 }
 
 
+
 header,
 footer {
   background: #d32f2f;
@@ -58,6 +59,7 @@ footer p {
 }
 
 
+
 main {
   padding: 1.5rem;
   max-width: 960px;
@@ -73,7 +75,6 @@ section h2 {
   padding-bottom: 0.4rem;
   color: #b71c1c;
 }
-
 
 
 aside {
@@ -270,7 +271,7 @@ img[alt="Hambúrguer Veggie Grill"] {
   gap: 0.4rem;
 }
 
-/* Botão Remover */
+
 .btn-remover {
   background: #fce4e4;
   color: #c62828;
@@ -287,7 +288,7 @@ img[alt="Hambúrguer Veggie Grill"] {
   background: #ef9a9a;
 }
 
-/* Botão Editar */
+
 .btn-editar {
   background: #e3f2fd;
   color: #1565c0;
@@ -305,6 +306,7 @@ img[alt="Hambúrguer Veggie Grill"] {
 }
 
 
+
 #totalComprado {
   font-size: 1.05rem;
   color: #2e7d32;
@@ -313,6 +315,7 @@ img[alt="Hambúrguer Veggie Grill"] {
   padding: 0.5rem 0.9rem;
   border-radius: 6px;
 }
+
 
 
 #formContato {
@@ -381,6 +384,7 @@ legend {
 #formContato button[type="submit"]:hover {
   background: #b71c1c;
 }
+
 
 
 @media (max-width: 600px) {
