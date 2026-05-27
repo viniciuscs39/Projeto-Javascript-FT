@@ -9,13 +9,13 @@
 </head>
 <body>
 
-  <!-- ===== CABEÇALHO ===== -->
+  
   <header>
     <h1>🍔 Foodtruck Burgers</h1>
     <p>Catálogo Digital</p>
   </header>
 
-  <!-- ===== NAVEGAÇÃO ===== -->
+ 
   <nav>
     <ul>
       <li><a href="#inicio">Início</a></li>
@@ -27,20 +27,20 @@
 
   <main>
 
-    <!-- ===== INÍCIO ===== -->
+    
     <section id="inicio">
       <h2>Bem-vindo ao Foodtruck Burgers</h2>
       <p>Hambúrgueres artesanais, acompanhamentos suculentos, bebidas especiais e sobremesas deliciosas.</p>
     </section>
 
-    <!-- ===== COMBOS (aside) ===== -->
+    
     <aside>
       <h3>🎁 Combos do Dia</h3>
       <p>Hambúrguer + Batata + Refrigerante por <strong>R$35,00</strong></p>
       <p>Hambúrguer + Batata + Suco Natural por <strong>R$36,00</strong></p>
     </aside>
 
-    <!-- ===== VITRINE ===== -->
+    
     <section id="vitrine">
       <h2>Vitrine de Produtos</h2>
       <div class="produtos">
@@ -102,11 +102,10 @@
       </div>
     </section>
 
-    <!-- ===== CARDÁPIO INTERATIVO ===== -->
+    
     <section id="cardapio">
       <h2>🛒 Monte seu Pedido</h2>
 
-      <!-- Formulário para adicionar / editar item -->
       <form id="formItem">
 
         <label for="categoria">Categoria:</label>
@@ -123,25 +122,24 @@
         <label for="preco">Preço (R$):</label>
         <input id="preco" type="number" step="0.01" min="0" placeholder="0.00" required>
 
-        <!-- id="btnSubmit" usado pelo JS para trocar o texto do botão -->
+        
         <button type="submit" id="btnSubmit">Adicionar Item</button>
         <button type="button" id="btnCancelar" style="display:none">Cancelar</button>
       </form>
 
-      <!-- Botões de ação rápida nos itens da lista -->
+      
       <div class="acoes-lista">
         <button type="button" id="btnRemoverUltimo">Remover Último (pop)</button>
         <button type="button" id="btnRemoverPrimeiro">Remover Primeiro (shift)</button>
       </div>
 
-      <!-- Lista de itens gerada pelo JS -->
+     
       <ul id="listaItem"></ul>
 
-      <!-- Total calculado dinamicamente -->
+      
       <p id="totalComprado"><strong>Total dos itens selecionados:</strong> R$0,00</p>
     </section>
 
-    <!-- ===== CONTATO / PEDIDO ===== -->
     <section id="contato">
       <h2>📬 Solicite seu Pedido</h2>
       <form id="formContato">
@@ -165,7 +163,7 @@
 
   </main>
 
-  <!-- ===== RODAPÉ ===== -->
+  
   <footer>
     <p>📍 Bloco A Lotes 3/4, 70092-900, Brasília - DF | ao lado da Sede da Caixa Econômica Federal</p>
     <p>✉️ contato@foodtruckburgers.com</p>
