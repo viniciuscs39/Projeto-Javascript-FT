@@ -1,150 +1,153 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Catálogo digital do Foodtruck Burgers. Confira hambúrgueres, acompanhamentos, bebidas e sobremesas.">
+  <meta name="description" content="Catálogo digital do Foodtruck Burgers.">
   <title>Catálogo Digital - Foodtruck Burgers</title>
   <link rel="stylesheet" href="index.css">
 </head>
- <body>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
   <header>
-    <h1>Foodtruck Burgers</h1>
+    <h1>🍔 Foodtruck Burgers</h1>
     <p>Catálogo Digital</p>
   </header>
 
+  <!-- ===== NAVEGAÇÃO ===== -->
   <nav>
     <ul>
       <li><a href="#inicio">Início</a></li>
       <li><a href="#vitrine">Vitrine</a></li>
-      <li><a href="#tabela">Tabela</a></li>
+      <li><a href="#cardapio">Cardápio</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
   </nav>
 
   <main>
+
+    <!-- ===== INÍCIO ===== -->
     <section id="inicio">
       <h2>Bem-vindo ao Foodtruck Burgers</h2>
-      <p>Confira nossos hambúrgueres artesanais, acompanhamentos suculentos, bebidas especiais e sobremesas deliciosas.</p>
+      <p>Hambúrgueres artesanais, acompanhamentos suculentos, bebidas especiais e sobremesas deliciosas.</p>
     </section>
 
+    <!-- ===== COMBOS (aside) ===== -->
     <aside>
-      <h3>Combos</h3>
-      <p>Hambúrguer + Batata + Refrigerante por R$35,00</p>
-      <p>Hambúrguer + Batata + Suco Natural por R$36,00</p>
+      <h3>🎁 Combos do Dia</h3>
+      <p>Hambúrguer + Batata + Refrigerante por <strong>R$35,00</strong></p>
+      <p>Hambúrguer + Batata + Suco Natural por <strong>R$36,00</strong></p>
     </aside>
 
+    <!-- ===== VITRINE ===== -->
     <section id="vitrine">
-  <h2>Vitrine de Produtos</h2>
-  <div class="produtos">
-    <article class="card">
-      <figure>
-        <img src="IMG/classico.jpg" alt="Hambúrguer Clássico da Casa">
-        <figcaption>Clássico da Casa</figcaption>
-      </figure>
-      <p>Pão brioche, carne bovina, queijo cheddar, alface, tomate e molho especial.</p>
-      <p class="preco">R$25,00</p>
-    </article>
+      <h2>Vitrine de Produtos</h2>
+      <div class="produtos">
 
-    <article class="card">
-      <figure>
-        <img src="IMG/barbecue.jpg" alt="Hambúrguer Barbecue Bacon">
-        <figcaption>Barbecue Bacon</figcaption>
-      </figure>
-      <p>Carne bovina, queijo prato, cebola caramelizada, bacon crocante e molho barbecue.</p>
-      <p class="preco">R$28,00</p>
-    </article>
+        <article class="card">
+          <figure>
+            <img src="IMG/classico.jpg" alt="Hambúrguer Clássico da Casa">
+            <figcaption>Clássico da Casa</figcaption>
+          </figure>
+          <p>Pão brioche, carne bovina, queijo cheddar, alface, tomate e molho especial.</p>
+          <p class="preco">R$25,00</p>
+        </article>
 
-    <article class="card">
-      <figure>
-        <!-- Aqui aplicamos o CSS específico -->
-        <img src="IMG/veggie.jpg" alt="Hambúrguer Veggie Grill">
-        <figcaption>Veggie Grill</figcaption>
-      </figure>
-      <p>Hambúrguer de grão-de-bico e legumes grelhados, queijo vegano e rúcula.</p>
-      <p class="preco">R$26,00</p>
-    </article>
+        <article class="card">
+          <figure>
+            <img src="IMG/barbecue.jpg" alt="Hambúrguer Barbecue Bacon">
+            <figcaption>Barbecue Bacon</figcaption>
+          </figure>
+          <p>Carne bovina, queijo prato, cebola caramelizada, bacon crocante e molho barbecue.</p>
+          <p class="preco">R$28,00</p>
+        </article>
 
-    <article class="card">
-      <figure>
-        <img src="IMG/batata.jpg" alt="Batata Frita Crocante">
-        <figcaption>Batata Frita</figcaption>
-      </figure>
-      <p>Batata frita crocante, temperada com sal especial.</p>
-      <p class="preco">R$12,00</p>
-    </article>
+        <article class="card">
+          <figure>
+            <img src="IMG/veggie.jpg" alt="Hambúrguer Veggie Grill">
+            <figcaption>Veggie Grill</figcaption>
+          </figure>
+          <p>Hambúrguer de grão-de-bico e legumes grelhados, queijo vegano e rúcula.</p>
+          <p class="preco">R$26,00</p>
+        </article>
 
-    <article class="card">
-      <figure>
-        <img src="IMG/refrigerante.jpg" alt="Refrigerante Gelado">
-        <figcaption>Refrigerante</figcaption>
-      </figure>
-      <p>Refrigerante gelado em lata ou garrafa.</p>
-      <p class="preco">R$6,00</p>
-    </article>
+        <article class="card">
+          <figure>
+            <img src="IMG/batata.jpg" alt="Batata Frita Crocante">
+            <figcaption>Batata Frita</figcaption>
+          </figure>
+          <p>Batata frita crocante, temperada com sal especial.</p>
+          <p class="preco">R$12,00</p>
+        </article>
 
-    <article class="card">
-      <figure>
-        <img src="IMG/suco.jpg" alt="Suco Natural">
-        <figcaption>Suco Natural</figcaption>
-      </figure>
-      <p>Suco natural de frutas frescas.</p>
-      <p class="preco">R$8,00</p>
-    </article>
-  </div>
-</section>
+        <article class="card">
+          <figure>
+            <img src="IMG/refrigerante.jpg" alt="Refrigerante Gelado">
+            <figcaption>Refrigerante</figcaption>
+          </figure>
+          <p>Refrigerante gelado em lata ou garrafa.</p>
+          <p class="preco">R$6,00</p>
+        </article>
 
+        <article class="card">
+          <figure>
+            <img src="IMG/suco.jpg" alt="Suco Natural">
+            <figcaption>Suco Natural</figcaption>
+          </figure>
+          <p>Suco natural de frutas frescas.</p>
+          <p class="preco">R$8,00</p>
+        </article>
+
+      </div>
     </section>
 
-  <section id="inicio">
-    
-  </section>
+    <!-- ===== CARDÁPIO INTERATIVO ===== -->
+    <section id="cardapio">
+      <h2>🛒 Monte seu Pedido</h2>
 
-  <aside>
-    
-  </aside>
+      <!-- Formulário para adicionar / editar item -->
+      <form id="formItem">
 
-  <section id="vitrine">
-    
-  </section>
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" required>
+          <option value="">Selecione</option>
+          <option value="Hambúrguer">Hambúrguer</option>
+          <option value="Acompanhamento">Acompanhamento</option>
+          <option value="Bebida">Bebida</option>
+        </select>
 
-  <section id="tabela">
-   
-  </section>
+        <label for="nomeItem">Nome:</label>
+        <input id="nomeItem" type="text" placeholder="Ex: X-Tudo" required>
 
-    <section id="Item">
-  <h2>Lista Itens</h2>
+        <label for="preco">Preço (R$):</label>
+        <input id="preco" type="number" step="0.01" min="0" placeholder="0.00" required>
 
-    <form id="formItem">
-    <label for="categoria">Categoria:</label>
-<select id="categoria" required>
-  <option value="">Selecione</option>
-  <option value="Hambúrguer">Hambúrguer</option>
-  <option value="Acompanhamento">Acompanhamento</option>
-  <option value="Bebida">Bebida</option>
-</select>
-    <label for="nomeItem">Nome:</label>
-    <input id="nomeItem" type="text" required>
+        <!-- id="btnSubmit" usado pelo JS para trocar o texto do botão -->
+        <button type="submit" id="btnSubmit">Adicionar Item</button>
+        <button type="button" id="btnCancelar" style="display:none">Cancelar</button>
+      </form>
 
-    <label for="preco">Preço:</label>
-    <input id="preco" type="number" step="0.01" required>
+      <!-- Botões de ação rápida nos itens da lista -->
+      <div class="acoes-lista">
+        <button type="button" id="btnRemoverUltimo">Remover Último (pop)</button>
+        <button type="button" id="btnRemoverPrimeiro">Remover Primeiro (shift)</button>
+      </div>
 
-    <button type="submit">Adicionar Item</button>
-  </form>
+      <!-- Lista de itens gerada pelo JS -->
+      <ul id="listaItem"></ul>
 
-  <ul id="listaItem"></ul>
-  <p id="totalComprado"><strong>Total dos itens comprados:</strong> R$0,00</p>
-</section>
+      <!-- Total calculado dinamicamente -->
+      <p id="totalComprado"><strong>Total dos itens selecionados:</strong> R$0,00</p>
+    </section>
 
-  <section id="contato">
-    
-  </section>
-
+    <!-- ===== CONTATO / PEDIDO ===== -->
     <section id="contato">
-      <h2>Solicite seu pedido</h2>
-      <form>
+      <h2>📬 Solicite seu Pedido</h2>
+      <form id="formContato">
         <fieldset>
           <legend>Dados Pessoais</legend>
+
           <label for="nome">Nome:</label>
           <input id="nome" name="nome" type="text" required>
 
@@ -156,17 +159,20 @@
         </fieldset>
 
         <button type="button" id="finalizarPedido">Finalizar Pedido</button>
-
         <button type="submit">Enviar</button>
       </form>
     </section>
+
   </main>
 
+  <!-- ===== RODAPÉ ===== -->
   <footer>
-    <p>Endereço: Bloco A Lotes 3/4, 70092-900, Brasília - DF, Brasil, ponto de referência: ao lado da Sede da Caixa Econômica Federal</p>
-    <p>Contato: contato@foodtruckburgers.com</p>
+    <p>📍 Bloco A Lotes 3/4, 70092-900, Brasília - DF | ao lado da Sede da Caixa Econômica Federal</p>
+    <p>✉️ contato@foodtruckburgers.com</p>
     <p>&copy; 2026 Foodtruck Burgers</p>
   </footer>
+
   <script src="index.js"></script>
 </body>
 </html>
+
