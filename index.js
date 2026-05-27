@@ -1,97 +1,257 @@
-let listaItem = [
-  { categoria: "Hambúrguer", nome: "Clássico da Casa", preco: 25, comprado: false },
-  { categoria: "Hambúrguer", nome: "Barbecue Bacon", preco: 28, comprado: false },
-  { categoria: "Hambúrguer", nome: "Veggie Grill", preco: 26, comprado: false },
-  { categoria: "Acompanhamento", nome: "Batata Frita", preco: 12, comprado: false },
-  { categoria: "Bebida", nome: "Refrigerante", preco: 6, comprado: false },
-  { categoria: "Bebida", nome: "Suco Natural", preco: 8, comprado: false },
-  { categoria: "Bebida", nome: "Água", preco: 4, comprado: false }
+// =============================================
+// FOODTRUCK BURGERS — Lógica do Cardápio
+// =============================================
+
+// -----------------------------------------------
+// ARRAY DE ITENS (objeto com categoria, nome, preço e status)
+// Cada elemento é um objeto literal { categoria, nome, preco, comprado }
+// -----------------------------------------------
+let listaItens = [
+  { categoria: "Hambúrguer",    nome: "Clássico da Casa", preco: 25, comprado: false },
+  { categoria: "Hambúrguer",    nome: "Barbecue Bacon",   preco: 28, comprado: false },
+  { categoria: "Hambúrguer",    nome: "Veggie Grill",     preco: 26, comprado: false },
+  { categoria: "Acompanhamento",nome: "Batata Frita",     preco: 12, comprado: false },
+  { categoria: "Bebida",        nome: "Refrigerante",     preco: 6,  comprado: false },
+  { categoria: "Bebida",        nome: "Suco Natural",     preco: 8,  comprado: false },
+  { categoria: "Bebida",        nome: "Água",             preco: 4,  comprado: false }
 ];
 
-let itemEditando = null; // guarda índice do item em edição
+// Guarda o índice do item sendo editado (null = modo adição)
+let itemEditando = null;
 
+// -----------------------------------------------
+// FUNÇÃO: gerarLista
+// Limpa e recria toda a <ul> com os itens do array
+// -----------------------------------------------
 function gerarLista() {
   const ul = document.getElementById("listaItem");
-  ul.innerHTML = "";
+  ul.innerHTML = ""; // limpa a lista antes de redesenhar
 
-  listaItem.forEach((item, index) => {
+  // forEach percorre cada elemento do array e cria um <li>
+  listaItens.forEach(function(item, index) {
     const li = document.createElement("li");
     li.classList.add("item-card");
 
+    // Se o item estiver marcado, adiciona a classe visual "comprado"
+    if (item.comprado) {
+      li.classList.add("comprado");
+    }
+
     li.innerHTML = `
       <div class="item-info">
-        <input type="checkbox" data-index="${index}" ${item.comprado ? "checked" : ""}>
-        <span>${item.categoria} - ${item.nome} (R$${item.preco.toFixed(2)})</span>
+        <input type="checkbox"
+               data-index="${index}"
+               ${item.comprado ? "checked" : ""}
+               title="Marcar como selecionado">
+        <span>${item.categoria} — ${item.nome}
+          <strong>(R$${item.preco.toFixed(2)})</strong>
+        </span>
       </div>
       <div class="item-actions">
-        <button class="btn-remover" onclick="removerItem(${index})">Remover</button>
-        <button class="btn-editar" onclick="prepararEdicao(${index})">Editar</button>
+        <button class="btn-remover" onclick="removerItem(${index})" title="Remover item">Remover</button>
+        <button class="btn-editar"  onclick="prepararEdicao(${index})" title="Editar item">Editar</button>
       </div>
     `;
-    ul.appendChild(li);
+
+    ul.appendChild(li); // insere o <li> no DOM
   });
 
-    ul.querySelectorAll("input[type=checkbox]").forEach(chk => {
-    chk.addEventListener("change", (e) => {
-      const idx = e.target.dataset.index;
-      listaItem[idx].comprado = e.target.checked;
-      calcularTotal();
+  // Adiciona evento de change nos checkboxes após renderizar
+  ul.querySelectorAll("input[type=checkbox]").forEach(function(chk) {
+    chk.addEventListener("change", function(e) {
+      const idx = parseInt(e.target.dataset.index); // converte string → número
+      listaItens[idx].comprado = e.target.checked;  // atualiza o objeto no array
+      gerarLista();      // re-renderiza para aplicar o risco no texto
+      calcularTotal();   // recalcula o total
     });
   });
 }
 
+// -----------------------------------------------
+// FUNÇÃO: calcularTotal
+// Usa filter() para pegar só os marcados e
+// reduce() para somar os preços → exibe no <p>
+// -----------------------------------------------
 function calcularTotal() {
-  const total = listaItem
-    .filter(item => item.comprado)
-    .reduce((acc, item) => acc + item.preco, 0);
+  // filter() — retorna novo array só com os itens comprado=true
+  const itensSelecionados = listaItens.filter(function(item) {
+    return item.comprado;
+  });
+
+  // reduce() — acumula a soma dos preços (começa em 0)
+  const total = itensSelecionados.reduce(function(acumulador, item) {
+    return acumulador + item.preco;
+  }, 0);
 
   document.getElementById("totalComprado").textContent =
-    `Total dos itens comprados: R$${total.toFixed(2)}`;
+    `Total dos itens selecionados: R$${total.toFixed(2)}`;
 }
 
-document.getElementById("formItem").addEventListener("submit", (e) => {
-  e.preventDefault();
+// -----------------------------------------------
+// EVENTO: submit do formulário
+// Adiciona um novo item (push) OU salva a edição
+// -----------------------------------------------
+document.getElementById("formItem").addEventListener("submit", function(e) {
+  e.preventDefault(); // impede recarregar a página
+
+  // Lê os valores do formulário
   const categoria = document.getElementById("categoria").value;
-  const nome = document.getElementById("nomeItem").value;
-  const preco = parseFloat(document.getElementById("preco").value);
+  const nome      = document.getElementById("nomeItem").value.trim();
+  const preco     = parseFloat(document.getElementById("preco").value);
 
   if (itemEditando !== null) {
-    
-    listaItem[itemEditando] = { 
-      categoria, 
-      nome, 
-      preco, 
-      comprado: listaItem[itemEditando].comprado 
+    // ---- MODO EDIÇÃO ----
+    // Sobrescreve o objeto no índice salvo, mantendo o status "comprado"
+    listaItens[itemEditando] = {
+      categoria: categoria,
+      nome:      nome,
+      preco:     preco,
+      comprado:  listaItens[itemEditando].comprado
     };
+
+    // Volta ao modo adição
     itemEditando = null;
     document.getElementById("btnSubmit").textContent = "Adicionar Item";
+    document.getElementById("btnCancelar").style.display = "none";
+
   } else {
-    
-    listaItem.push({ categoria, nome, preco, comprado: false });
+    // ---- MODO ADIÇÃO ----
+    // push() — adiciona o novo objeto no FINAL do array
+    listaItens.push({
+      categoria: categoria,
+      nome:      nome,
+      preco:     preco,
+      comprado:  false
+    });
   }
 
-  e.target.reset();
-  gerarLista();
-  calcularTotal();
+  e.target.reset();   // limpa os campos do formulário
+  gerarLista();       // atualiza a lista na tela
+  calcularTotal();    // atualiza o total
 });
 
+// -----------------------------------------------
+// FUNÇÃO: removerItem
+// splice() remove 1 elemento pelo índice
+// -----------------------------------------------
 function removerItem(index) {
-  listaItem.splice(index, 1);
+  // splice(início, quantidade) — remove e reordena o array
+  listaItens.splice(index, 1);
+
+  // Se estava editando o item removido, cancela a edição
+  if (itemEditando === index) {
+    cancelarEdicao();
+  }
+
   gerarLista();
   calcularTotal();
 }
 
+// -----------------------------------------------
+// FUNÇÃO: prepararEdicao
+// Preenche o formulário com os dados do item
+// -----------------------------------------------
 function prepararEdicao(index) {
-  const item = listaItem[index];
+  const item = listaItens[index];
+
   document.getElementById("categoria").value = item.categoria;
-  document.getElementById("nomeItem").value = item.nome;
-  document.getElementById("preco").value = item.preco;
-  itemEditando = index;
- 
-  document.getElementById("btnSubmit").textContent = "Salvar Alteração";
+  document.getElementById("nomeItem").value  = item.nome;
+  document.getElementById("preco").value     = item.preco;
+
+  itemEditando = index; // marca o índice em edição
+  document.getElementById("btnSubmit").textContent  = "Salvar Alteração";
+  document.getElementById("btnCancelar").style.display = "inline-block";
+
+  // Rola suavemente até o formulário
+  document.getElementById("formItem").scrollIntoView({ behavior: "smooth" });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+// -----------------------------------------------
+// FUNÇÃO: cancelarEdicao
+// Reseta o formulário e volta ao modo adição
+// -----------------------------------------------
+function cancelarEdicao() {
+  itemEditando = null;
+  document.getElementById("formItem").reset();
+  document.getElementById("btnSubmit").textContent = "Adicionar Item";
+  document.getElementById("btnCancelar").style.display = "none";
+}
+
+// -----------------------------------------------
+// BOTÃO: Remover Último — pop()
+// pop() retira o ÚLTIMO elemento do array e o retorna
+// -----------------------------------------------
+document.getElementById("btnRemoverUltimo").addEventListener("click", function() {
+  if (listaItens.length === 0) {
+    alert("A lista já está vazia!");
+    return;
+  }
+
+  const removido = listaItens.pop(); // remove e guarda o item retirado
+  alert(`"${removido.nome}" removido do final da lista.`);
+
   gerarLista();
   calcularTotal();
 });
+
+// -----------------------------------------------
+// BOTÃO: Remover Primeiro — shift()
+// shift() retira o PRIMEIRO elemento do array e o retorna
+// -----------------------------------------------
+document.getElementById("btnRemoverPrimeiro").addEventListener("click", function() {
+  if (listaItens.length === 0) {
+    alert("A lista já está vazia!");
+    return;
+  }
+
+  const removido = listaItens.shift(); // remove e guarda o item retirado
+  alert(`"${removido.nome}" removido do início da lista.`);
+
+  gerarLista();
+  calcularTotal();
+});
+
+// -----------------------------------------------
+// BOTÃO: Cancelar edição
+// -----------------------------------------------
+document.getElementById("btnCancelar").addEventListener("click", cancelarEdicao);
+
+// -----------------------------------------------
+// BOTÃO: Finalizar Pedido
+// Usa filter() + map() para montar o resumo
+// -----------------------------------------------
+document.getElementById("finalizarPedido").addEventListener("click", function() {
+  // filter() — pega só os marcados
+  const selecionados = listaItens.filter(function(item) {
+    return item.comprado;
+  });
+
+  if (selecionados.length === 0) {
+    alert("Selecione ao menos um item antes de finalizar!");
+    return;
+  }
+
+  // map() — transforma cada objeto em uma string legível
+  const resumo = selecionados.map(function(item) {
+    return `• ${item.nome} (${item.categoria}) — R$${item.preco.toFixed(2)}`;
+  });
+
+  // reduce() — total final
+  const total = selecionados.reduce(function(acc, item) {
+    return acc + item.preco;
+  }, 0);
+
+  // Exibe o resumo do pedido
+  alert(
+    "=== Resumo do Pedido ===\n" +
+    resumo.join("\n") +
+    `\n\nTotal: R$${total.toFixed(2)}\n\nObrigado pela preferência! 🍔`
+  );
+});
+
+// -----------------------------------------------
+// INICIALIZAÇÃO
+// Renderiza a lista assim que a página carrega
+// -----------------------------------------------
+gerarLista();
+calcularTotal();
